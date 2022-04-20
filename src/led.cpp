@@ -1,4 +1,32 @@
 #include "led.hpp"
+#include "math.h"
+
+//Constants for LED
+const int grounds[2] = {2, 3};
+
+const int segments[7] = {
+	4, //A
+	5, //B
+	6, //C
+	7, //D
+	8, //E
+	9, //F
+	10,//G
+};
+
+const bool numbers[11][7] = {
+	{true, true, true, true, true, true, false},
+	{false, true, true, false, false, false, false},
+	{true, true, false, true, true, false, true},
+	{true, true, true, true, false, false, true},
+	{false, true, true, false, false, true, true},
+	{true, false, true, true, false, true, true},
+	{true, false, true, true, true, true, true},
+	{true, true, true, false, false, false, false},
+	{true, true, true, true, true, true, true},
+	{true, true, true, true, false, true, true},
+	{false, false, false, true, true, true, false}
+};
 
 //Runtime globals
 unsigned int currentlyDisplayingLED = 0;
@@ -79,4 +107,8 @@ void setCurrentlyDisplayingNumber(unsigned int num) {
 }
 unsigned int getCurrentlyDisplayingNumber() {
 	return currentlyDisplayingNumber;
+}
+
+unsigned int getMaximumDisplayable() {
+	return pow(10, ARRAY_LENGTH(grounds)) - 1;
 }

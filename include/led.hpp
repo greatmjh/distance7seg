@@ -9,5 +9,6 @@ void setupLED();
 void displayNumber();
 void setCurrentlyDisplayingNumber(unsigned int num);
 unsigned int getCurrentlyDisplayingNumber();
+unsigned int getMaximumDisplayable();
 
 #endif //LED_HPP

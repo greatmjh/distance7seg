@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <math.h>
 #include "constants.hpp"
 #include "led.hpp"
 
@@ -18,6 +17,6 @@ void loop() {
 	if (millis() - lastNumberUpdate > numberUpdateInterval) { //Check if the time has come to increment
 		lastNumberUpdate = millis();
 		setCurrentlyDisplayingNumber(getCurrentlyDisplayingNumber() + 1);
-		if (getCurrentlyDisplayingNumber() > pow(10, ARRAY_LENGTH(grounds)) - 1) setCurrentlyDisplayingNumber(0);
+		if (getCurrentlyDisplayingNumber() > getMaximumDisplayable()) setCurrentlyDisplayingNumber(0);
 	}
 }
