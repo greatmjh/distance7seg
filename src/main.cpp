@@ -3,12 +3,15 @@
 
 void displayNumber();
 void updateCurrentDisplay();
+void displayDigit(unsigned int digit);
 
 //Runtime globals
 unsigned int currentlyDisplayingDigits[ARRAY_LENGTH(grounds)] = {6, 9};
+unsigned int lastCurrentlyDisplayingDigits[ARRAY_LENGTH(grounds)] = {10, 10};
 unsigned int currentlyDisplayingLED = 0;
+unsigned int lastDisplayedDigit = 10;
 unsigned long lastUpdate = 0;
-const int updateInterval = 5;
+const int updateInterval = 2;
 
 void setup() {
 	//Setup multiplexing grounds
@@ -41,13 +44,13 @@ void displayNumber() {
 		if (currentlyDisplayingLED > ARRAY_LENGTH(grounds)) currentlyDisplayingLED = 0;
 		updateCurrentDisplay();
 	}
-	
 
-	//Put current number in relevant display slot on current display
-	for (size_t i = 0; i < ARRAY_LENGTH(segments); i++) {
-		//if (currentlyDisplayingDigits[currentlyDisplayingLED] > ARRAY_LENGTH(numbers)) break;
-		digitalWrite(segments[i], numbers[currentlyDisplayingDigits[currentlyDisplayingLED]][i]);
+	//Redisplay only if the last number isn't what we're trying to display
+	if (lastDisplayedDigit != currentlyDisplayingDigits[currentlyDisplayingLED]) {
+		lastDisplayedDigit = currentlyDisplayingDigits[currentlyDisplayingLED];
+		displayDigit(currentlyDisplayingDigits[currentlyDisplayingLED]);
 	}
+
 }
 
 void updateCurrentDisplay() {
@@ -59,3 +62,11 @@ void updateCurrentDisplay() {
 		}
 	}
 }
+
+void displayDigit(unsigned int digit) {
+	if (digit > ARRAY_LENGTH(numbers)) return;
+	for (size_t i = 0; i < ARRAY_LENGTH(segments); i++) {
+		digitalWrite(segments[i], numbers[digit][i]);
+	}
+}
+
