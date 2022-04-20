@@ -10,7 +10,7 @@ Ultrasonic* ultrasonic;
 
 void setup() {
 	setupLED();
-	ultrasonic = new Ultrasonic(12, 13);
+	ultrasonic = new Ultrasonic(PIN_US_ECHO, PIN_US_TRIG);
 	Serial.begin(9600);
 }
 

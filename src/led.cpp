@@ -2,16 +2,16 @@
 #include "math.h"
 
 //Constants for LED
-const int grounds[2] = {2, 3};
+const int grounds[2] = {PIN_7SEG_G1, PIN_7SEG_G2};
 
 const int segments[7] = {
-	4, //A
-	5, //B
-	6, //C
-	7, //D
-	8, //E
-	9, //F
-	10,//G
+	PIN_7SEG_A,
+	PIN_7SEG_B,
+	PIN_7SEG_C,
+	PIN_7SEG_D,
+	PIN_7SEG_E,
+	PIN_7SEG_F,
+	PIN_7SEG_G
 };
 
 const bool numbers[11][7] = {
