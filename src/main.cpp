@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <math.h>
 #include "constants.hpp"
 
 void displayNumber();
@@ -38,18 +39,22 @@ void loop() {
 	if (millis() - lastNumberUpdate > numberUpdateInterval) { //Check if the time has come to increment
 		lastNumberUpdate = millis();
 		currentlyDisplayingNumber++;
-		if (currentlyDisplayingNumber > 99) currentlyDisplayingNumber = 0;
+		if (currentlyDisplayingNumber > pow(10, ARRAY_LENGTH(grounds)) - 1) currentlyDisplayingNumber = 0;
 	}
-	return;
 }
 
 void displayNumber() {	
 	//Split the currently displayed digit into an array
 	unsigned int currentlyDisplayingDigits[ARRAY_LENGTH(grounds)]; 
-	unsigned int place = 1;
-	for (size_t i = ARRAY_LENGTH(currentlyDisplayingDigits); i > 0; i--) { //loop backwards from the 
-		currentlyDisplayingDigits[i - 1] = (currentlyDisplayingNumber / place) % 10;
-		place *= 10;
+	if (currentlyDisplayingNumber <= pow(10, ARRAY_LENGTH(grounds)) - 1) {
+		unsigned int place = 1;
+		for (size_t i = ARRAY_LENGTH(currentlyDisplayingDigits); i > 0; i--) { //loop backwards from the 
+			currentlyDisplayingDigits[i - 1] = (currentlyDisplayingNumber / place) % 10;
+			place *= 10;
+		}
+	} else {
+		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 2] = 0;
+		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 1] = 10;
 	}
 
 	//Check if we need to change which LED we're displaying on

@@ -16,7 +16,7 @@ const int segments[7] = {
 	10,//G
 };
 
-const bool numbers[10][7] = {
+const bool numbers[11][7] = {
 	{true, true, true, true, true, true, false},
 	{false, true, true, false, false, false, false},
 	{true, true, false, true, true, false, true},
@@ -26,7 +26,8 @@ const bool numbers[10][7] = {
 	{true, false, true, true, true, true, true},
 	{true, true, true, false, false, false, false},
 	{true, true, true, true, true, true, true},
-	{true, true, true, true, false, true, true}
+	{true, true, true, true, false, true, true},
+	{false, false, false, true, true, true, false}
 };
 
 #endif //CONSTANTS_HPP
