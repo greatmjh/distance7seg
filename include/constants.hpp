@@ -4,6 +4,7 @@
 
 #define ARRAY_LENGTH(array) (sizeof((array))/sizeof((array)[0]))
 
+//Pin constants - edit these to change pin configuration
 #define PIN_7SEG_G1 2
 #define PIN_7SEG_G2 3
 #define PIN_7SEG_A 4
@@ -14,7 +15,6 @@
 #define PIN_7SEG_F 9
 #define PIN_7SEG_G 10
 #define PIN_7SEG_DP 11
-
 #define PIN_US_ECHO 12
 #define PIN_US_TRIG 13
 
