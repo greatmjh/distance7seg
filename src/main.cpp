@@ -1,22 +1,27 @@
 #include <Arduino.h>
 #include "constants.hpp"
 #include "led.hpp"
+#include "ultrasonic.hpp"
 
 //Runtime globals
-unsigned long lastNumberUpdate = 0;
-const int numberUpdateInterval = 250;
+unsigned long lastUltrasonicUpdate = 0;
+const int ultrasonicUpdateInterval = 100;
+Ultrasonic* ultrasonic;
 
 void setup() {
 	setupLED();
+	ultrasonic = new Ultrasonic(12, 13);
+	Serial.begin(9600);
 }
 
 void loop() {
 	displayNumber(); // Display what we have
-
-	//Number incrementing code
-	if (millis() - lastNumberUpdate > numberUpdateInterval) { //Check if the time has come to increment
-		lastNumberUpdate = millis();
-		setCurrentlyDisplayingNumber(getCurrentlyDisplayingNumber() + 1);
-		if (getCurrentlyDisplayingNumber() > getMaximumDisplayable()) setCurrentlyDisplayingNumber(0);
+	//Read ultrasonic periodically
+	
+	if (millis() - lastUltrasonicUpdate > ultrasonicUpdateInterval) { //Check if the time has come to check
+		lastUltrasonicUpdate = millis();
+		setCurrentlyDisplayingNumber(ultrasonic->getDistance());
 	}
+	
+	Serial.println(getCurrentlyDisplayingNumber());
 }

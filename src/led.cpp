@@ -25,7 +25,7 @@ const bool numbers[11][7] = {
 	{true, true, true, false, false, false, false},
 	{true, true, true, true, true, true, true},
 	{true, true, true, true, false, true, true},
-	{false, false, false, true, true, true, false}
+	{false, false, false, false, false, false, false}
 };
 
 //Runtime globals
@@ -49,7 +49,7 @@ void displayNumber() {
 			place *= 10;
 		}
 	} else {
-		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 2] = 0;
+		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 2] = 10;
 		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 1] = 10;
 	}
 
