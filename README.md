@@ -1,6 +1,10 @@
 # Distance7seg
 Displays the distance recorded by a HC-SR04 ultrasonic sensor on 7 segment displays
 
+## Building and running
+This repository is a PlatformIO project, and as such must be build with PlatformIO.
+Install the PlatformIO extension in VS Code if not installed already, and open this repository as a project in PlatformIO.
+
 ## Circuit
 The circuit that goes along with this program must have 1 or more (preferrably 2) 7 segment modules connected in a multiplex configuration where all the non-ground pins are joined together.
 These non-ground pins should then be connected to the Arduino via a resistor (470 ohm recommended). Note that the letters mentioned in `constants.hpp` does not correspond physically to the pin layout of the modules, and you most refer to the datasheet of your modules to see where the pins connect.
