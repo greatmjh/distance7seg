@@ -13,8 +13,8 @@ long Ultrasonic::getDistance() {
 	digitalWrite(triggerPin, HIGH);
 	delayMicroseconds(10);
 	digitalWrite(triggerPin, LOW);
-	long m_duration = pulseIn(echoPin, HIGH);
-	//Serial.println(m_duration);
+	unsigned long m_duration = pulseIn(echoPin, HIGH, 6000);
+	if (!m_duration) m_duration = -1; //If the pulse doesn't come back, make it the integer limit to show as overload instead of 0
 	m_distance = m_duration * 0.034 / 2;
 	return m_distance;
 }
