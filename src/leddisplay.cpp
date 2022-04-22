@@ -36,32 +36,31 @@ void LEDdisplay::addModule(size_t moduleID, unsigned int moduleGroundPin) {
 }
 
 void LEDdisplay::multiplex() {
-	//Split the currently displayed digit into an array
-	unsigned int currentlyDisplayingDigits[moduleCount]; 
-	if (currentlyDisplayingNumber <= getMaximumDisplayableNumber()) {
-		unsigned int place = 1;
-		for (size_t i = ARRAY_LENGTH(currentlyDisplayingDigits); i > 0; i--) { //loop backwards from the most right place
-			currentlyDisplayingDigits[i - 1] = (currentlyDisplayingNumber / place) % 10; //gets the digit from the number
-			place *= 10;
-		}
-	} else { //Number too big, display blank
-		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 2] = 10;
-		currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 1] = 10;
-	}
-
 	//Is it time to do the next multiplex?
 	if (millis() - lastMultiplexUpdate > multiplexUpdateInterval) {
 		lastMultiplexUpdate = millis();
 		currentlyDisplayingModule++;
 		if (currentlyDisplayingModule > ARRAY_LENGTH(moduleGrounds)) currentlyDisplayingModule = 0; //Select the next display module to multiplex
-		updateCurrentDisplay(); //Push that change
-	}
 
-	//Redisplay only if the last number isn't what we're trying to display
-	if (lastDisplayedDigit != currentlyDisplayingDigits[currentlyDisplayingModule]) {
-		lastDisplayedDigit = currentlyDisplayingDigits[currentlyDisplayingModule];
+		//Split the currently displayed digit into an array
+		unsigned int currentlyDisplayingDigits[moduleCount]; 
+		if (currentlyDisplayingNumber <= getMaximumDisplayableNumber()) {
+			unsigned int place = 1;
+			for (size_t i = ARRAY_LENGTH(currentlyDisplayingDigits); i > 0; i--) { //loop backwards from the most right place
+				currentlyDisplayingDigits[i - 1] = (currentlyDisplayingNumber / place) % 10; //gets the digit from the number
+				place *= 10;
+			}
+		} else { //Number too big, display blank
+			currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 2] = 10;
+			currentlyDisplayingDigits[ARRAY_LENGTH(currentlyDisplayingDigits) - 1] = 10;
+		}
+
+		//Push values
+		displayDigit(10); //Clear to prevent ghosting on other displays
+		updateCurrentDisplay(); //Push that change
 		displayDigit(currentlyDisplayingDigits[currentlyDisplayingModule]);
-	}
+
+	}	
 }
 
 void LEDdisplay::setCurrentlyDisplayingNumber(unsigned int num) {

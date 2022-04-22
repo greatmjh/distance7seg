@@ -28,7 +28,6 @@ private:
 
 	//Globals
 	unsigned int currentlyDisplayingModule = 0; //Which module is being targeted by multiplexor
-	unsigned int lastDisplayedDigit = ARRAY_LENGTH(numbers); //What is currently out on the pins
 	unsigned long lastMultiplexUpdate = 0; //Last time multiplexing happened
 	unsigned int currentlyDisplayingNumber; //The number being displayed over the whole module
 
